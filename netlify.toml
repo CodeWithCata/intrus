@@ -1,0 +1,25 @@
+# Netlify: static SvelteKit build (adapter-static) + the generated _headers file.
+# Set these in Netlify (Site settings > Environment variables), NOT here:
+#   VITE_PARTY_HOST   host of the game server, no scheme, e.g. intrus-party.<you>.workers.dev  (empty = online play off)
+#   CSP_REPORT_ONLY   1 on a first deploy to see CSP violations in the console without blocking; remove once clean
+# The lockfile (pnpm-lock.yaml) must be committed: Netlify installs with a frozen lockfile.
+[build]
+  command = "pnpm build && node scripts/headers.mjs build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# A missing build file must be a real 404, never the app shell: otherwise the HTML could be cached under an old
+# /_app/immutable/... chunk URL (immutable cache) and break every returning visitor. Must stay ABOVE the catch-all.
+# Real files are served first (this rule is not forced), so only missing ones reach it.
+[[redirects]]
+  from = "/_app/*"
+  to = "/index.html"
+  status = 404
+
+# Single-page app: deep links such as /online/ABCDEF load the app. Real files (service-worker.js, assets) are served as they are.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

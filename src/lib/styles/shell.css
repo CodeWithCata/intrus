@@ -1,0 +1,15 @@
+/* App shell: installed desktop title bar, transparent iOS status bar, online "who has acted" avatars. */
+/* Installed desktop app, Window Controls Overlay: the page runs UNDER the title bar, so the bar is transparent and shows the page background; the minimise / maximise / close buttons float on top at the right. #tb is the strip the window is dragged by (nothing is clickable in it); the content starts below it. Everywhere else #tb is not rendered. */
+#tb{display:none}
+@media (display-mode: window-controls-overlay){#tb{display:block;position:fixed;z-index:2;left:env(titlebar-area-x,0px);top:env(titlebar-area-y,0px);width:env(titlebar-area-width,100%);height:env(titlebar-area-height,0px);-webkit-app-region:drag;app-region:drag}body{padding-top:env(titlebar-area-height,0px)}#app{min-height:calc(100dvh - env(titlebar-area-height,0px))}}
+
+/* Transparent status bar (installed app, iOS "black-translucent"): the page runs under the clock / battery, whose icons iOS always draws white. On the light theme a soft dark fade behind them keeps them readable; it is 0 px tall wherever there is no safe-area inset (browser tab, desktop), and dark themes need nothing. */
+html:not([data-theme=dark]):not([data-theme=noir]) body::before{content:"";position:fixed;z-index:30;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:linear-gradient(rgba(17,17,20,.42),rgba(17,17,20,0));pointer-events:none}
+
+/* Online: who has done something yet (looked at the card, voted): a row of avatars, the ones still missing dimmed. */
+.statusrow{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s1)}
+.statusrow .sp{position:relative;display:inline-flex;transition:opacity var(--ease),filter var(--ease)}
+.statusrow .sp:not(.done){opacity:.35;filter:grayscale(1)}
+.statusrow .sp .ck{position:absolute;right:-2px;bottom:-2px;width:18px;height:18px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center}
+.statusrow .sp .ck svg{width:12px;height:12px}
+.cr .gone{opacity:.4;filter:grayscale(1)}

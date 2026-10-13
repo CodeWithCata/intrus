@@ -1,0 +1,33 @@
+/*
+ * Self-hosted fonts (SIL OFL, licenses in assets/fonts/licenses). Subset to Basic Latin, Latin-1,
+ * Latin Extended-A and the Romanian comma-below letters (ș ț). The browser downloads a face only
+ * when something on screen uses it, so Bangers (comic card) and Caveat (hand card) stay lazy.
+ */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("../assets/fonts/plus-jakarta-sans.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/anton.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Bangers";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/bangers.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/caveat-700.woff2") format("woff2");
+}

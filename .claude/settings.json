@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./tests/golden/**)",
+      "Read(./pnpm-lock.yaml)",
+      "Read(./static/**)",
+      "Read(./src/lib/assets/**)",
+      "Read(./node_modules/**)",
+      "Read(./.svelte-kit/**)",
+      "Read(./build/**)",
+      "Read(./server/.wrangler/**)"
+    ]
+  }
+}

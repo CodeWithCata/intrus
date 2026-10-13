@@ -1,0 +1,207 @@
+/* Themes, accents, theme switch, home screen sizing and late overrides. */
+/* themes (05) */
+html[data-theme=dark],html[data-theme=noir]{color-scheme:dark;--paper:#0F0F13;--fog:#1B1B21;--line:#2C2C35;--ink:#F4F4F6;--grey:#A3A3B0;--sf:#1A1A21;--sf2:#14141A;--e1:#26262E;--e2:#1D1D24;--bd:rgba(255,255,255,.09);--shd:rgba(0,0,0,.55);--shf:rgba(18,18,23,.96);--m2:rgba(110,120,255,.12);--m3:rgba(255,150,110,.07)}
+html[data-theme=noir]{--paper:#000;--fog:#111;--line:#3A3A3A;--ink:#fff;--grey:#C8C8D0;--sf:#0A0A0A;--sf2:#000;--e1:#161616;--e2:#0D0D0D;--bd:rgba(255,255,255,.6);--shf:rgba(8,8,8,.96);background:#000}
+html:is([data-theme=dark],[data-theme=noir]) .sum,html:is([data-theme=dark],[data-theme=noir]) .panel,html:is([data-theme=dark],[data-theme=noir]) .sheet .panel,html:is([data-theme=dark],[data-theme=noir]) .pl .cr,html:is([data-theme=dark],[data-theme=noir]) .chip2{background:linear-gradient(180deg,var(--sf),var(--sf2));border-color:var(--bd);outline:1px solid rgba(255,255,255,.04);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 12px 30px -18px var(--shd)}
+html:is([data-theme=dark],[data-theme=noir]) .sheet,html:is([data-theme=dark],[data-theme=noir]) .sheet:has(.cats){background:linear-gradient(180deg,#1A1A21,#121217);box-shadow:0 -20px 50px -20px rgba(0,0,0,.7)}
+html:is([data-theme=dark],[data-theme=noir]) .cats .cat{background-color:var(--sf);box-shadow:inset 0 0 0 1.5px var(--line)}
+html:is([data-theme=dark],[data-theme=noir]) .btn:not(.go),html:is([data-theme=dark],[data-theme=noir]) .pillbtn,html:is([data-theme=dark],[data-theme=noir]) .seg,html:is([data-theme=dark],[data-theme=noir]) .chip,html:is([data-theme=dark],[data-theme=noir]) .custom,html:is([data-theme=dark],[data-theme=noir]) .round,html:is([data-theme=dark],[data-theme=noir]) .sheet .ri,html:is([data-theme=dark],[data-theme=noir]) .pl .pick{background:linear-gradient(180deg,var(--e1),var(--e2));color:var(--ink);box-shadow:inset 0 0 0 1px var(--bd)}
+html:is([data-theme=dark],[data-theme=noir]) .cat,html:is([data-theme=dark],[data-theme=noir]) .suspect,html:is([data-theme=dark],[data-theme=noir]) .outcome,html:is([data-theme=dark],[data-theme=noir]) .starter{background-color:var(--e2)}
+html:is([data-theme=dark],[data-theme=noir]) .pl .field,html:is([data-theme=dark],[data-theme=noir]) .lineup,html:is([data-theme=dark],[data-theme=noir]) .pip{background:var(--e2);box-shadow:inset 0 1px 3px rgba(0,0,0,.4)}
+html:is([data-theme=dark],[data-theme=noir]) .pl .field:focus,html:is([data-theme=dark],[data-theme=noir]) .custom:focus,html:is([data-theme=dark],[data-theme=noir]) .custom:focus-visible{background:var(--e1)}
+html:is([data-theme=dark],[data-theme=noir]) .cats .cat .cic{background:radial-gradient(90% 90% at 30% 20%,var(--e1),var(--e2));box-shadow:inset 0 0 0 1px var(--bd)}
+html:is([data-theme=dark],[data-theme=noir]) .btn.go,html:is([data-theme=dark],[data-theme=noir]) .kstep .round.inc,html:is([data-theme=dark],[data-theme=noir]) .seg::before,html:is([data-theme=dark],[data-theme=noir]) .outcome.rec,html:is([data-theme=dark],[data-theme=noir]) .no,html:is([data-theme=dark],[data-theme=noir]) .stk span,html:is([data-theme=dark],[data-theme=noir]) .pl .addrow .plus,html:is([data-theme=dark],[data-theme=noir]) .pl .cam,html:is([data-theme=dark],[data-theme=noir]) .bdg:not(.o),html:is([data-theme=dark],[data-theme=noir]) .cr:has(.switch[aria-checked="true"]) .ri,html:is([data-theme=dark],[data-theme=noir]) .switch[aria-checked="true"],html:is([data-theme=dark],[data-theme=noir]) .chip[aria-pressed="true"],html:is([data-theme=dark],[data-theme=noir]) .cats .cat[aria-pressed="true"],html:is([data-theme=dark],[data-theme=noir]) .bgtest[aria-pressed="true"]{background:linear-gradient(180deg,#fff,#DCDCE3);color:#111114;box-shadow:inset 0 1px 0 #fff,0 10px 22px -12px rgba(255,255,255,.35)}
+html:is([data-theme=dark],[data-theme=noir]) .seg button[aria-pressed="true"],html:is([data-theme=dark],[data-theme=noir]) .outcome.rec .pts{color:#111114}
+html:is([data-theme=dark],[data-theme=noir]) .cats .cat[aria-pressed="true"] small{color:rgba(17,17,20,.62)}
+html:is([data-theme=dark],[data-theme=noir]) .cats .cat[aria-pressed="true"] .cic{background:rgba(17,17,20,.1);box-shadow:none}
+html:is([data-theme=dark],[data-theme=noir]) .switch[aria-checked="true"]::after{background:#111114}
+html:is([data-theme=dark],[data-theme=noir]) .suspect .lens{color:#111114}
+html:is([data-theme=dark],[data-theme=noir]) .sum .ri .ic [fill="#fff"]{fill:var(--sf2)}
+html:is([data-theme=dark],[data-theme=noir]) .sum .ri .ic [stroke="#fff"]{stroke:var(--sf2)}
+html:is([data-theme=dark],[data-theme=noir]) .kstep .round.inc:disabled{background:var(--e2);color:var(--grey);box-shadow:none}
+html:is([data-theme=dark],[data-theme=noir]) .sheet>.btn.go{box-shadow:0 -14px 16px 14px var(--shf),0 16px 30px -14px rgba(0,0,0,.6)}
+html:is([data-theme=dark],[data-theme=noir]) .dock,html:is([data-theme=dark],[data-theme=noir]) .home .dock{background:linear-gradient(rgba(15,15,19,0),rgba(15,15,19,.85) 45%,rgba(15,15,19,.96))}
+html:is([data-theme=dark],[data-theme=noir]) .card{background:linear-gradient(160deg,#2B2B31 0,#111114 70%);outline:1px solid rgba(255,255,255,.16);outline-offset:-1px}
+html:is([data-theme=dark],[data-theme=noir]) .card.open{background:radial-gradient(80% 60% at 50% 0,rgba(255,255,255,.1),transparent 70%),linear-gradient(180deg,#2A2A33,#1A1A21)}
+html:is([data-theme=dark],[data-theme=noir]) .card.open.bad{background:linear-gradient(160deg,var(--a1),var(--a2));color:#fff}
+html:is([data-theme=dark],[data-theme=noir]) .bgart .bgw{filter:invert(.9) hue-rotate(180deg) brightness(.6);opacity:.4}
+html:is([data-theme=dark],[data-theme=noir]) .trophy [fill="#111114"]{fill:var(--ink)}
+html:is([data-theme=dark],[data-theme=noir]) .cone{opacity:.16}
+html[data-theme=noir] .bgart{display:none}
+html[data-theme=noir] .sum,html[data-theme=noir] .panel,html[data-theme=noir] .sheet .panel,html[data-theme=noir] .pl .cr,html[data-theme=noir] .btn:not(.go),html[data-theme=noir] .seg,html[data-theme=noir] .chip,html[data-theme=noir] .custom,html[data-theme=noir] .round,html[data-theme=noir] .cat,html[data-theme=noir] .suspect,html[data-theme=noir] .outcome,html[data-theme=noir] .starter,html[data-theme=noir] .cats .cat,html[data-theme=noir] .th{outline:1.5px solid var(--bd);outline-offset:-1.5px}
+html[data-theme=noir] .sheet,html[data-theme=noir] .sheet:has(.cats){background:#0A0A0A}
+html[data-theme=noir] .hero2{outline:2px solid #fff;outline-offset:-2px}
+.themes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s1)}
+.th{position:relative;display:flex;flex-direction:column;gap:10px;padding:10px 10px 12px;border-radius:var(--r1);background:var(--fog);box-shadow:inset 0 0 0 1.5px var(--line);font-weight:800;font-size:var(--fs-s);text-align:center;transition:transform .3s cubic-bezier(.2,1.5,.4,1),box-shadow .2s}
+.th:active{transform:scale(.95)}
+.th[aria-pressed="true"]{box-shadow:inset 0 0 0 2.5px var(--ink)}
+.tp{display:grid;gap:5px;align-content:start;height:84px;padding:8px;border-radius:12px;background:var(--pb);box-shadow:inset 0 0 0 1px rgba(128,128,128,.25)}
+.tp i{display:block;height:14px;border-radius:6px;background:var(--pc);box-shadow:0 0 0 1px var(--pl)}
+.tp i:first-child{height:26px;background:var(--red);box-shadow:none}
+.tp i:nth-child(3){width:64%;height:10px;background:var(--pk);box-shadow:none}
+.th[data-t=light] .tp{--pb:#F2F2F5;--pc:#fff;--pl:#E4E4E9;--pk:#111114}
+.th[data-t=dark] .tp{--pb:#0F0F13;--pc:#1D1D24;--pl:#2C2C35;--pk:#F4F4F6}
+.th[data-t=noir] .tp{--pb:#000;--pc:#000;--pl:#fff;--pk:#fff}
+.ck{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.th .ck{position:absolute;top:6px;right:6px;width:22px;height:22px;padding:4px;border-radius:50%;background:var(--ink);color:var(--paper);transform:scale(0);transition:transform .3s cubic-bezier(.2,1.6,.4,1)}
+.th[aria-pressed="true"] .ck{transform:scale(1)}
+.accs{display:grid;grid-template-columns:repeat(auto-fit,minmax(44px,1fr));justify-items:center;gap:14px}
+.ac{position:relative;width:44px;height:44px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;box-shadow:inset 0 2px 0 rgba(255,255,255,.28),0 8px 14px -8px var(--c);transition:transform .3s cubic-bezier(.2,1.5,.4,1),box-shadow .2s}
+.ac:active{transform:scale(.88)}
+.ac[aria-pressed="true"]{transform:scale(1.08);box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--c),0 8px 14px -8px var(--c)}
+.ac .ck{width:22px;height:22px;opacity:0;transform:scale(.4);transition:opacity .2s,transform .3s cubic-bezier(.2,1.6,.4,1)}
+.ac[aria-pressed="true"] .ck{opacity:1;transform:none}
+.link.full{width:100%}
+.intro{flex:1;display:flex;flex-direction:column;animation:fade .3s ease}
+.hbtn.txt{width:auto;padding:0 20px;font-weight:800;font-size:var(--fs-s)}
+.islides{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;margin-top:var(--s4)}
+.islides::-webkit-scrollbar{display:none}
+.isl{flex:0 0 100%;scroll-snap-align:center;display:flex;flex-direction:column;align-items:flex-start;gap:var(--s3);padding:0 var(--s3)}
+.iic{width:72px;height:72px;border-radius:24px;display:grid;place-items:center;color:var(--red);background:var(--fog);box-shadow:inset 0 0 0 1px var(--line)}
+.iic .ic{width:36px;height:36px}
+.isl .h1{font-size:32px}
+.isl .muted{margin-top:var(--s1);font-size:18px}
+.idots{display:flex;align-items:center;gap:8px;height:24px}
+.idots i{width:8px;height:8px;border-radius:var(--pill);background:var(--line);transition:width .3s cubic-bezier(.2,1.4,.4,1),background .3s}
+.idots i.on{width:28px;background:var(--red)}
+.codebox{display:grid;grid-template-columns:1fr auto;gap:var(--s2);align-items:center}
+.codebox .cap{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--grey)}
+.codebox .code{font-size:clamp(22px,7vw,32px);letter-spacing:.08em;text-align:left;padding:4px 0 14px}
+.codebox .btn{min-height:48px;padding:0 var(--s2);font-size:var(--fs-s)}
+.qrw{display:flex;flex-direction:column;align-items:center;gap:6px}
+.qrw .small{font-size:12px}
+.qr{display:block;width:116px;height:116px;border-radius:14px;box-shadow:0 0 0 1px var(--line),0 10px 20px -12px rgba(0,0,0,.5);animation:qpop .5s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes qpop{from{opacity:0;transform:scale(.8) rotate(-4deg)}}
+@media (max-width:360px){.codebox{grid-template-columns:1fr}}
+#toast{position:fixed;left:50%;bottom:calc(108px + env(safe-area-inset-bottom,0px));z-index:40;width:min(calc(100% - 32px),440px);display:flex;align-items:center;gap:var(--s1);min-height:56px;padding:0 6px 0 var(--s3);border-radius:var(--pill);background:var(--ink);color:var(--paper);box-shadow:0 18px 36px -14px rgba(0,0,0,.55);overflow:hidden;opacity:0;transform:translate(-50%,24px);pointer-events:none;transition:transform .35s cubic-bezier(.2,1.2,.4,1),opacity .2s}
+#upd{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 10px);z-index:41;width:min(calc(100% - 24px),440px);display:flex;align-items:center;gap:var(--s1);min-height:56px;padding:6px 6px 6px var(--s2);border-radius:var(--pill);background:var(--ink);color:var(--paper);box-shadow:0 18px 36px -14px rgba(0,0,0,.55);transform:translate(-50%,0);animation:updin .45s cubic-bezier(.2,1.2,.4,1) both}
+#upd .uic{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--red);color:#fff}
+#upd .uic .ic{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#upd .umsg{flex:1;min-width:0;font-weight:700;font-size:var(--fs-s);line-height:1.25}
+#upd .ubtn{flex:none;min-height:44px;padding:0 var(--s3);border-radius:var(--pill);background:var(--red);color:#fff;font-weight:800;font-size:var(--fs-s);transition:transform var(--ease),opacity var(--ease)}
+#upd .ubtn:active{transform:scale(.95)}
+#upd .ubtn:disabled{opacity:.6;pointer-events:none}
+@keyframes updin{from{opacity:0;transform:translate(-50%,-24px)}}
+@media (prefers-reduced-motion:reduce){#upd{animation:none}}
+#toast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.tmsg{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;font-size:var(--fs-s)}
+.tbtn{flex:none;min-height:44px;padding:0 var(--s2);border-radius:var(--pill);font-weight:800;font-size:var(--fs-s);color:var(--paper);background:rgba(128,128,128,.3)}
+.tbtn:active{transform:scale(.95)}
+.tbar{position:absolute;left:0;bottom:0;width:100%;height:3px;background:var(--red);transform-origin:left;animation:tlife 5s linear forwards}
+@keyframes tlife{to{transform:scaleX(0)}}
+.intro .itop{display:flex;align-items:center;justify-content:space-between;padding:var(--s3) var(--s3) 0}
+.iw{font:400 28px/1 Anton,Impact,sans-serif;letter-spacing:.02em;color:var(--red)}
+.intro .hbtn.txt{background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;height:40px}
+.intro .islides{margin-top:var(--s2)}
+.isl{gap:var(--s4);justify-content:center}
+.isl .it h2{font:400 clamp(40px,12.5vw,52px)/.98 Anton,Impact,sans-serif;letter-spacing:.005em;text-transform:uppercase;text-wrap:balance}
+.isl .it p{margin-top:var(--s2);font-size:17px;line-height:1.5;color:var(--grey);max-width:30ch}
+.v{align-self:stretch;min-height:208px;display:flex;align-items:center;justify-content:center;gap:var(--s2)}
+.wd{display:grid;place-items:center;width:calc((100% - 48px)/4);max-width:84px;aspect-ratio:3/4;border-radius:var(--r1);background:var(--ink);color:#fff;font:800 11px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.01em;box-shadow:0 14px 24px -14px rgba(17,17,20,.55)}
+.wd:nth-child(odd){transform:translateY(10px) rotate(-3deg)}
+.wd:nth-child(even){transform:translateY(-6px) rotate(2.5deg)}
+.wd.me{background:var(--red);font:400 34px/1 Anton,sans-serif;transform:translateY(-14px) rotate(4deg);box-shadow:0 18px 28px -12px color-mix(in srgb,var(--red) 70%,transparent)}
+html:is([data-theme=dark],[data-theme=noir]) .wd:not(.me){background:#26262E;box-shadow:inset 0 0 0 1.5px var(--line)}
+
+/* Players sheet: only the list scrolls; suggestions, "Adaugă jucător" and "Gata" stay pinned at the bottom. */
+.sheet[data-k="players"]{overflow:hidden}
+.plscroll{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin:0 -8px;padding:3px 8px 10px;scrollbar-width:thin;scrollbar-color:var(--sbt) var(--sbk)}
+.pdock{flex:none;display:flex;flex-direction:column;gap:8px}
+.pdock .addrow{min-height:56px;padding:0 16px 0 8px;gap:12px}
+.pdock .addrow .plus{width:40px;height:40px}
+.pdock .pcap{margin:0;line-height:1.2}
+.nsug{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;margin:0 calc(var(--s3) * -1);padding:2px var(--s3)}
+.nsug::-webkit-scrollbar{display:none}
+.nsug button{flex:none;min-height:36px;padding:0 14px;border-radius:var(--pill);background:var(--fog);font-size:14px;font-weight:700;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(17,17,20,.06);transition:transform .15s,background .2s}
+.nsug button:active{transform:scale(.94);background:var(--line)}
+.pl .cr{padding-top:8px;padding-bottom:8px;min-height:72px}
+.pen[aria-expanded="true"]{color:var(--ink)}
+@media (max-height:700px){.pdock .pcap{display:none}}
+
+/* Avatar builder: dice / photo / remove-photo are round badges on the character itself. */
+.bldtop{display:flex;justify-content:center;flex-shrink:0}
+.bldw{position:relative;width:calc(150px + 40px);padding:var(--s1) 0}
+.bldw .bldp{padding:0}
+.bldw .bldb{position:absolute;inset:0;pointer-events:none}
+.bldw .bldb .chip{position:absolute;display:grid;place-items:center;width:44px;height:44px;min-height:0;padding:0;gap:0;border-radius:50%;pointer-events:auto;box-shadow:0 0 0 3px #fff,0 6px 12px -3px rgba(17,17,20,.45)}
+.bldw .bldb .chip .ic{width:22px;height:22px}
+.bldw .bldb .bd-dice{left:0;bottom:6px;background:var(--ink);color:#fff}
+.bldw .bldb .bd-cam{right:0;bottom:6px;background:var(--ink);color:#fff}
+.bldw .bldb .bd-x{right:6px;top:8px;width:36px;height:36px;background:var(--red);color:#fff}
+.bldw .bldb .bd-x .ic{width:18px;height:18px;stroke-width:2.6}
+.bldw .bldb .chip:active{transform:scale(.9)}
+
+/* Home screen: compact rows, "Revanșă" pill on the Jucători row. */
+.page2{gap:12px}
+.sum{min-height:72px;padding:10px var(--s2)}
+.page2>.sum .ri,.page2>.sum:first-child .ri,.sumw .sum .ri{width:36px;height:40px}
+.page2>.sum .ri .ic,.page2>.sum:first-child .ri .ic,.sumw .sum .ri .ic{width:32px;height:32px;stroke-width:1.75}
+.page2>.sum .rt,.sumw>.sum .rt{gap:2px}
+.sum .stk span{width:28px;height:28px}
+.sumw{position:relative}
+.sumw>.sum{padding-right:128px}
+.sumw>.sum>.ic{position:absolute;right:14px;top:50%;margin-top:-10px}
+.rmact{position:absolute;right:42px;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:var(--pill);background:var(--ink);color:#fff;font-weight:800;font-size:14px;z-index:1}
+.rmact .ic{width:16px;height:16px}
+.rmact:active{transform:translateY(-50%) scale(.94)}
+
+/* Home screen, small and short phones: every row reachable, one row height, calmer background, clearer wordmark. */
+.sum,.hbtn,.btn{touch-action:manipulation}
+.hbtn{min-width:44px;min-height:44px}
+.sum{min-height:var(--row-h,76px)}
+.page2{gap:10px;padding-top:var(--s3);padding-bottom:calc(var(--dock-h,112px) + var(--s2));scroll-padding-bottom:var(--dock-h,112px)}
+.home .dock{padding-top:var(--s4);gap:var(--s1)}
+.logo span{letter-spacing:.04em;margin-top:.1em}
+.hero2 .tag{margin-top:var(--s1)}
+@media (max-width:560px){
+  html:not([data-theme=dark]):not([data-theme=noir]) .bgart .bgw.city{opacity:.4}
+  html:not([data-theme=dark]):not([data-theme=noir]) .bgart .bgw.sky{opacity:.75}
+}
+@media (max-height:740px){
+  :root{--row-h:68px;--dock-h:96px}
+  .hero2{min-height:clamp(168px,27svh,216px);margin-top:var(--s1)}
+  .hero2 .icons{top:var(--s1);left:var(--s1);right:var(--s1)}
+  .logo{font-size:clamp(40px,12vw,64px)}
+  .page2{gap:8px;padding-top:var(--s2)}
+  .sum{padding-top:8px;padding-bottom:8px}
+  .home .dock{padding-top:var(--s3);padding-bottom:calc(var(--s1) + env(safe-area-inset-bottom,0px))}
+}
+@media (max-height:700px){.dock .note{display:none}}
+
+/* Bottom sheets can be dragged down to dismiss (sheet-drag.ts): bigger grabber hit area, no browser scroll on the drag zones, dim that follows the drag. */
+.sheet{overscroll-behavior-y:contain}
+.sheet>.grab{position:relative;flex:none;touch-action:none}
+.sheet>.grab::after{content:"";position:absolute;inset:-14px -60px -18px}
+.sheet>.shead,.sheet>#st{touch-action:none;-webkit-user-select:none;user-select:none}
+.sheet[data-drag]{cursor:grabbing;-webkit-user-select:none;user-select:none}
+@media (hover:hover) and (pointer:fine){.sheet>.grab{cursor:grab}}
+.scrim::before{opacity:var(--dim,1);transition:opacity .28s cubic-bezier(.22,1,.36,1)}
+.scrim[data-dragging]::before{transition:none}
+
+/* Dark / noir: --ink turns light there, so the badges that pair it with fixed white text need the same inverted look as .btn.go (they had white text on a near-white pill). */
+html:is([data-theme=dark],[data-theme=noir]) :is(.rmact,.bldw .bldb .bd-dice,.bldw .bldb .bd-cam){background:linear-gradient(180deg,#fff,#DCDCE3);color:#111114;box-shadow:inset 0 1px 0 #fff,0 10px 22px -12px rgba(255,255,255,.35)}
+html:is([data-theme=dark],[data-theme=noir]) .bldw .bldb :is(.bd-dice,.bd-cam){box-shadow:0 0 0 3px var(--paper),0 6px 12px -3px rgba(0,0,0,.6)}
+
+/* Sticky "Gata" footer: a stuck button sits above the sheet's own bottom padding, and on phones performance.css (!important) removes the soft fade
+   shadow, so scrolled content showed through around it (a half-cut panel under the button). Flat, blur-free bands in the sheet's own colour
+   fill the strip above and below the button instead: cheap to paint, and the same on every device. */
+:root{--shs:#F7F7FA}
+html[data-theme=dark]{--shs:#121217}
+html[data-theme=noir]{--shs:#0A0A0A}
+html .sheet>.btn.go,html .sheet>.btn.go:active{box-shadow:0 2px 6px -3px rgba(17,17,20,.35),0 -12px 0 8px var(--shs),0 64px 0 40px var(--shs)!important}
+
+/* Theme / accent switch: no element fades on its own for the frames that carry the change (see freezeTransitions in settings.ts), so the whole page changes at once instead of flashing. */
+html.noswap *,html.noswap *::before,html.noswap *::after{transition:none!important}
+/* Phones: the twinkling of the background art (windows, "?" marks) fades single SVG elements inside a big composited layer, which repaints that layer every frame and reads as flicker. Movement stays; only the opacity pulsing stops. */
+@media (hover:none),(pointer:coarse){.bgart svg :is(.tw,.qm,.bl,.sm,.ss,.scf){animation:none!important}}
+/* Phones, screen changes: one soft entrance instead of two stacked ones. The container no longer fades on top of its children (that doubled the fade and flashed), the stagger is short and capped so the page is never blank for long, and the children only slide a little (no scaling, which re-rasterises text on every frame). */
+@keyframes upm{from{opacity:0;transform:translateY(10px)}}
+@media (hover:none),(pointer:coarse){
+.screen{animation:none}
+.screen>*:not(.stamp),.page2>*{animation:upm .32s var(--out) calc(min(var(--k,0),6)*.035s) backwards}
+.page2>*{animation-delay:calc(.05s + min(var(--k,0),6)*.04s)}
+.hero2{animation:upm .4s var(--out) backwards}
+#app>.dock{animation:upm .35s var(--out) .12s backwards}
+.scrim:not(.still) .sheet>:nth-child(n+2){animation:upm .3s var(--out) .04s backwards}
+}
+@media (hover:none) and (prefers-reduced-motion:reduce){.screen>*:not(.stamp),.page2>*,.hero2,#app>.dock{animation:none}}

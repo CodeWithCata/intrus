@@ -1,0 +1,9 @@
+.svelte-kit/
+build/
+node_modules/
+static/
+test-results/
+playwright-report/
+pnpm-lock.yaml
+tests/golden/
+src/lib/data/words/

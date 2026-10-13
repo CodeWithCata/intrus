@@ -1,0 +1,40 @@
+# Game server (PartyKit `partyserver` on a Cloudflare Durable Object).
+# Local:  pnpm party:dev        Deploy:  pnpm party:deploy
+# Secrets (never commit): `wrangler secret put CODE_SECRET`. Locally copy .dev.vars.example to .dev.vars.
+# NOT VERIFIED here (no network): run `wrangler deploy --dry-run --config server/wrangler.toml` first and fix any
+# complaint about the compatibility date, the migration or the rate-limit binding below.
+name = "intrus-party"
+main = "party.ts"
+compatibility_date = "2026-06-01"
+
+[[durable_objects.bindings]]
+name = "Game"
+class_name = "Game"
+
+# SQLite-backed Durable Object (recommended for new classes; the only kind the free plan allows).
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Game"]
+
+[observability]
+enabled = true
+
+[vars]
+# PRODUCTION origins allowed to open a socket (comma-separated, exact origins). Empty = nobody (fails closed), so set it
+# to your real site before deploying, e.g. "https://intrus.example.com".
+# Netlify deploy previews, only if you want them: add "https://*--YOUR-SITE-NAME.netlify.app" (the * never spans a dot).
+# NEVER add "https://*.netlify.app": that would let every site hosted on Netlify use this server.
+# Local development does not use this value: copy .dev.vars.example to .dev.vars, which has the localhost origins.
+ALLOWED_ORIGINS = "https://intrus.netlify.app"
+
+# Rate limit for POST /api/new-code (per IP). The code works without this binding too.
+[[ratelimits]]
+name = "NEW_CODE_LIMITER"
+namespace_id = "1001"
+simple = { limit = 10, period = 60 }
+
+# Rate limit for WebSocket upgrades into a room (per IP). Optional, like the one above.
+[[ratelimits]]
+name = "CONNECT_LIMITER"
+namespace_id = "1002"
+simple = { limit = 60, period = 60 }
