@@ -15,10 +15,11 @@ import { CARD_DESIGNS } from "#lib/data/card-designs.ts";
 import { HD, HL } from "#lib/components/rules/rules-ui.ts";
 import { displayName } from "#lib/utils/id.ts";
 import { TWISTS } from "#lib/game/twists.ts";
+import { PERSONAS } from "#lib/game/twist-rules.ts";
 
 const labels = (): string[] => [
   ...THEMES.map((x) => x[1]), ...ACCS.map((x) => x[1]), ...Object.values(RV).map((r) => r.l),
-  ...RS.map((x) => x[1]), ...RB.map((x) => x[1]), ...Object.values(TKS).flat(), ...CARD_DESIGNS.map((x) => x[1]), ...HL, ...Object.values(HD), ...TWISTS.flatMap((x) => x.slice(1))
+  ...RS.map((x) => x[1]), ...RB.map((x) => x[1]), ...Object.values(TKS).flat(), ...CARD_DESIGNS.map((x) => x[1]), ...HL, ...Object.values(HD), ...TWISTS.flatMap((x) => x.slice(1)), ...PERSONAS
 ].filter((l) => l !== "forwards");
 
 describe("table labels", () => {

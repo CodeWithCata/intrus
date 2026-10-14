@@ -571,6 +571,7 @@ export const ro = {
   rdAgent: "Agent dublu: {name} avea „{word}”",
   rdExtra: "Intrus în plus: au fost {n}, nu {k}",
   rdDbl: "Dublu sau nimic: punctele sunt duble",
+  rdPersona: "Vocea rundei: {v}",
   rdCounting: "Se numără voturile…",
   rdCountingSr: "Se numără voturile",
   rdWouldBe: "Intrusul ar fi…",
@@ -619,6 +620,7 @@ export const ro = {
   tmResumed: "Timer reluat. Mai sunt {t}",
   spStarts: "Începe {name}.",
   spTwist: "Răsturnare: {name}. {desc}",
+  spPersona: "Vocea rundei: {v}.",
   spQuestion: "Întrebarea: {q}",
   spAsks: "{name} întreabă: {q}",
   // Intro, custom words and saved lists

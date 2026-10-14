@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import * as RL from "../room-logic.ts";
+import { PERSONAS, pickPersona } from "../../src/lib/game/twist-rules.ts";
 import { NOW, PACKS, PAIR_PACKS, SEC, ctx, everythingPublic, intruderIds, lobbyOf, modeLobby, roundOf, seqRng } from "./helpers.ts";
 
 const state = (room: ReturnType<typeof lobbyOf>, now = NOW) => RL.publicState(room, now);
@@ -199,11 +200,67 @@ describe("twists", () => {
 
   test("Blitz halves the discussion time", () => {
     const room = modeLobby(4, { tw: true, minutes: 2 });
-    RL.startRound(room, "host", {}, ctx({ rng: twistRng(0.7) }));
+    RL.startRound(room, "host", {}, ctx({ rng: twistRng(0.65) }));
     expect(room.current?.twist).toBe("blitz");
     RL.startTalk(room, "host", ctx());
     const later = NOW + RL.TALK_LEAD_MS + RL.WHEEL_TOTAL_MS;
     expect(RL.publicState(room, later).timer?.remainingMs).toBe(60 * SEC);
+  });
+
+  test("'only what it is NOT' is a plain rule twist: told to everybody once the discussion starts, nothing else changes", () => {
+    const room = modeLobby(4, { tw: true });
+    const { roles } = RL.startRound(room, "host", {}, ctx({ rng: twistRng(0.5) }));
+    expect(room.current?.twist).toBe("neg");
+    expect(room.current?.persona).toBeNull();
+    expect(intruderIds(roles)).toHaveLength(1);
+    expect(RL.publicState(room, NOW).twist).toBeNull();
+    RL.startTalk(room, "host", ctx());
+    expect(RL.publicState(room, NOW).twist).toBe("neg");
+    expect(RL.publicState(room, NOW).persona).toBeNull();
+    const { delta } = resolve(room, "host", "caught");
+    expect(Object.values(delta).filter((d) => d === 1)).toHaveLength(3); // no points change
+  });
+
+  test("question mode never rolls 'only what it is NOT'", () => {
+    for (let i = 0; i < 40; i++) {
+      const room = modeLobby(4, { tw: true, qm: true });
+      RL.startRound(room, "host", {}, ctx({ rng: twistRng(i / 40) }));
+      expect(room.current?.twist).not.toBe("neg");
+    }
+  });
+
+  test("the character voice is picked by the server, so every phone shows the same one, and it is public only with the twist", () => {
+    const room = modeLobby(4, { tw: true });
+    RL.startRound(room, "host", {}, ctx({ rng: twistRng(0.85, 0.5) }));
+    expect(room.current?.twist).toBe("voc");
+    expect(room.current?.persona).toBe(pickPersona(() => 0.5));
+    expect(RL.publicState(room, NOW).persona).toBeNull(); // not before the discussion, like every twist
+    RL.startTalk(room, "host", ctx());
+    expect(RL.publicState(room, NOW).twist).toBe("voc");
+    expect(RL.publicState(room, NOW).persona).toBe(pickPersona(() => 0.5));
+    expect(PERSONAS[RL.publicState(room, NOW).persona as number]).toBe("Povestitor de documentar");
+    RL.revealRound(room, "host");
+    expect(RL.publicState(room, NOW).persona).toBe(pickPersona(() => 0.5)); // still on show while the round lasts
+    expect(RL.publicState(room, NOW).reveal).toEqual(expect.objectContaining({ twist: "voc" }));
+  });
+
+  test("only the character-voice round draws a persona (other twists and plain rounds draw nothing extra)", () => {
+    const plain = modeLobby(4, { tw: false });
+    RL.startRound(plain, "host", {}, ctx({ rng: twistRng(0.85, 0.5) }));
+    expect(plain.current?.persona).toBeNull();
+    const other = modeLobby(4, { tw: true });
+    RL.startRound(other, "host", {}, ctx({ rng: twistRng(0.5) }));
+    expect(other.current?.persona).toBeNull();
+    RL.startTalk(other, "host", ctx());
+    expect(RL.publicState(other, NOW).persona).toBeNull();
+  });
+
+  test("a room saved before the character voice existed still loads and shows no persona", () => {
+    const room = modeLobby(4, { tw: true });
+    RL.startRound(room, "host", {}, ctx({ rng: twistRng(0.85, 0.5) }));
+    RL.startTalk(room, "host", ctx());
+    delete (room.current as unknown as Record<string, unknown>).persona;
+    expect(RL.publicState(room, NOW).persona).toBeNull();
   });
 
   test("the double agent holds the related word as if it were THE word, and it stays secret until the reveal", () => {

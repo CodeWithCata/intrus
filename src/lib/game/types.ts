@@ -165,6 +165,8 @@ export interface Round {
     /** Double agent of the "ag" twist, and the related word they get instead of `word`. */
     da?: number;
     word2?: string;
+    /** "Voce de personaj" twist: index into PERSONAS (game/twist-rules.ts) of the voice everybody talks in this round. */
+    persona?: number;
     /** "Cuvinte gemene": the round was dealt with twin words (intruders hold `twin`, nobody is told). */
     tn?: boolean;
     /** The similar word the intruders got in a twin-words round. */

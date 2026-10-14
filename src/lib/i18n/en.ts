@@ -568,6 +568,7 @@ export const en: Record<MessageKey, string> = {
   rdAgent: "Double agent: {name} had “{word}”",
   rdExtra: "Extra intruder: there were {n}, not {k}",
   rdDbl: "Double or nothing: points are doubled",
+  rdPersona: "Voice of the round: {v}",
   rdCounting: "Counting the votes…",
   rdCountingSr: "Counting the votes",
   rdWouldBe: "The intruder would be…",
@@ -616,6 +617,7 @@ export const en: Record<MessageKey, string> = {
   tmResumed: "Timer resumed. {t} left",
   spStarts: "{name} starts.",
   spTwist: "Twist: {name}. {desc}",
+  spPersona: "The voice of the round: {v}.",
   spQuestion: "The question: {q}",
   spAsks: "{name} asks: {q}",
   // Intro, custom words and saved lists

@@ -36,7 +36,7 @@
 <div><h1 class="h1">{t("rdDiscussion")}</h1><p class="muted">{st?.settings?.qm ? t("rdTalkQ") : t("rdTalkW")}</p></div>
 {#if spinning}<FirstWheel {first} players={wheelPlayers} startAt={talkLocal.startAt} ondone={landed} />{/if}
 {#if starter}<p class="starter" style:visibility={spinning ? "hidden" : null}><Avatar player={{ a: 0, l: starter.l }} size={32} />{t("rdStarts", { name: starter.name })}</p>{/if}
-<TwistCard tw={st?.twist ?? null} />{#if st?.question}<OnlineQuestion />{/if}
+<TwistCard tw={st?.twist ?? null} persona={st?.persona ?? null} />{#if st?.question}<OnlineQuestion />{/if}
 <div class="grow"></div>
 {#if timer}<TimerRing />{/if}
 <div class="grow"></div>

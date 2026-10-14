@@ -1,7 +1,7 @@
 /** Starting a round, resolving the outcome, next round, and the discussion timer.  (see room-logic.ts) */
 import { pickIntruders } from "../src/lib/game/intruders.ts";
 import { partnersAvailable } from "../src/lib/game/twins.ts";
-import { pickTwist } from "../src/lib/game/twist-rules.ts";
+import { pickPersona, pickTwist } from "../src/lib/game/twist-rules.ts";
 import { HINTS, MAX_TIMER_MS, MIN_PLAYERS, POINTS, RoomError, TIMER_ACTIONS, isString, markHostAction, maxImposters, requireHost, wheelEndsAt } from "./room-core.ts";
 import { roleFor, sweep } from "./room-members.ts";
 import { pickWord } from "./room-settings.ts";
@@ -41,9 +41,11 @@ export function startRound(room: Room, hostId: string, opts: StartOptions, ctx: 
   let twist: string | null = null;
   let agentId: string | null = null;
   let word2: string | null = null;
+  let persona: number | null = null;
   if (!troll && s?.tw) {
     twist = pickTwist({ last: room.lastTwist, questions: !!s.qm, timer: Number(s.minutes) > 0, twin: twin !== null, players: active.length, intruders: imposterIds.length, related: picked.related.length }, rng);
     const civilians = active.map((p) => p.id).filter((id) => !imposterIds.includes(id));
+    if (twist === "voc") persona = pickPersona(rng);
     if (twist === "ex") imposterIds = [...imposterIds, civilians[Math.floor(rng() * civilians.length)]];
     if (twist === "ag") {
       agentId = civilians[Math.floor(rng() * civilians.length)];
@@ -61,7 +63,7 @@ export function startRound(room: Room, hostId: string, opts: StartOptions, ctx: 
   room.timer = null;
   const current: Current = {
     imposterIds, playerIds: active.map((p) => p.id), category: picked.category, decoy: picked.decoy || null, word: picked.word, hint, vote: null, seen: [], talk: null, revealed: false,
-    troll, twin, twist, agentId, word2, known, customHint: picked.customHint, baseIntruders, question: null
+    troll, twin, twist, agentId, word2, persona, known, customHint: picked.customHint, baseIntruders, question: null
   };
   room.current = current;
   markHostAction(room);

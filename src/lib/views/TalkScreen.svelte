@@ -39,7 +39,7 @@
   <div><h1 class="h1">{t("rdDiscussion")}</h1><p class="muted">{appState.qm ? t("rdTalkQ") : t("rdTalkW")}</p></div>
   {#if spinning}<FirstWheel first={round.first} ondone={landed} />{/if}
   <p class="starter" style:visibility={spinning ? "hidden" : null}><Avatar player={appState.players[round.first]} size={32} />{t("rdStarts", { name: playerName(round.first) })}</p>
-  {#if appState.vh && VOICE_SUPPORTED}<VoiceButton />{/if}<TwistCard tw={round.tw} />{#if appState.qm}<QuestionCard />{/if}
+  {#if appState.vh && VOICE_SUPPORTED}<VoiceButton />{/if}<TwistCard tw={round.tw} persona={round.persona ?? null} />{#if appState.qm}<QuestionCard />{/if}
   <div class="grow"></div>
   {#if appState.tm}<TimerRing />{/if}
   <div class="grow"></div>{#if appState.tm}<TalkControls />{/if}

@@ -3,14 +3,38 @@
  * The 40% chance, the rule against repeating the last twist and the conditions of each twist live here and nowhere else.
  */
 
-export const TWIST_IDS = ["sopt", "rev", "rep", "adj", "mima", "blitz", "dbl", "ag", "ex"] as const;
+export const TWIST_IDS = ["sopt", "rev", "rep", "adj", "mima", "neg", "blitz", "dbl", "voc", "ag", "ex"] as const;
 export type TwistId = (typeof TWIST_IDS)[number];
 
 /** Twists that are a secret until the reveal (nobody is told about them during the round). */
 export const HIDDEN_TWISTS: readonly string[] = ["ag", "ex"];
 
 /** Twists that make no sense in question mode (they change how people describe the card). */
-const NOT_WITH_QUESTIONS: readonly string[] = ["adj", "mima", "rep"];
+const NOT_WITH_QUESTIONS: readonly string[] = ["adj", "mima", "rep", "neg"];
+
+/**
+ * The characters of the "Voce de personaj" twist (id "voc"): the whole table talks in the same voice for the round.
+ * The Romanian text is the identity (English is in i18n/labels.ts, like the twist names). The round stores only the INDEX
+ * (`Round.persona` / `Current.persona`), so never reorder or remove entries: add new ones at the END.
+ */
+export const PERSONAS: readonly string[] = [
+  "Crainic de știri",
+  "Pirat",
+  "Bunică supărată",
+  "Comentator de fotbal",
+  "Robot defect",
+  "Povestitor de documentar",
+  "Actor de telenovelă",
+  "Vânzător de teleshopping",
+  "Căpitan de avion",
+  "Detectiv de film noir",
+  "Vrăjitor bătrân"
+];
+
+/** A random persona (an index into PERSONAS). `rng` returns [0, 1). */
+export function pickPersona(rng: () => number = Math.random): number {
+  return Math.min(PERSONAS.length - 1, Math.floor(rng() * PERSONAS.length));
+}
 
 export const TWIST_CHANCE = 0.4;
 

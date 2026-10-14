@@ -30,6 +30,7 @@ export function publicState(room: Room, now: number): PublicState {
     dealt: room.phase === "round" && room.current ? [...room.current.playerIds] : null,
     talk: talkView(room, now),
     twist: twistView(room),
+    persona: personaView(room),
     question: questionView(room),
     reveal: revealView(room)
   };
@@ -40,6 +41,11 @@ function twistView(room: Room): string | null {
   const c = room.current;
   if (room.phase !== "round" || !c || !c.talk || !c.twist || HIDDEN_TWISTS.includes(c.twist)) return null;
   return c.twist;
+}
+
+/** The character of the "Voce de personaj" twist: public exactly when that twist is (from the start of the discussion), never otherwise. */
+function personaView(room: Room): number | null {
+  return twistView(room) === "voc" ? room.current?.persona ?? null : null;
 }
 
 function questionView(room: Room): QuestionView | null {

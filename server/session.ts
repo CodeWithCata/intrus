@@ -95,6 +95,7 @@ export class RoomSession {
       cur.twist ??= null;
       cur.agentId ??= null;
       cur.word2 ??= null;
+      cur.persona ??= null;
       cur.known ??= false;
       cur.customHint ??= null;
       cur.baseIntruders ??= cur.imposterIds?.length ?? 1;

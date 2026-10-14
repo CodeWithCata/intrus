@@ -5,9 +5,9 @@
 import type { Round } from "#lib/game/types.ts";
 import { state } from "#lib/stores/settings.svelte.ts";
 import { relatedWords } from "#lib/stores/wordlists.svelte.ts";
-import { pickTwist } from "#lib/game/twist-rules.ts";
+import { pickPersona, pickTwist } from "#lib/game/twist-rules.ts";
 
-export const TWISTS = ([["sopt", "Șoptit", "Toată discuția se face în șoaptă."], ["rev", "Sens invers", "După cel care începe, mergeți în partea opusă."], ["rep", "Fără repetiții", "Un cuvânt spus nu mai poate fi spus de altcineva."], ["adj", "Doar adjective", "Descrieți cartea doar cu adjective."], ["mima", "Mimă", "Fără cuvinte: arătați cartea doar prin gesturi."], ["blitz", "Blitz", "Timpul de discuție se înjumătățește."], ["dbl", "Dublu sau nimic", "Punctele din runda asta se dublează."], ["ag", "Agent dublu"], ["ex", "Intrus în plus"]] as any[][]);
+export const TWISTS = ([["sopt", "Șoptit", "Toată discuția se face în șoaptă."], ["rev", "Sens invers", "După cel care începe, mergeți în partea opusă."], ["rep", "Fără repetiții", "Un cuvânt spus nu mai poate fi spus de altcineva."], ["adj", "Doar adjective", "Descrieți cartea doar cu adjective."], ["mima", "Mimă", "Fără cuvinte: arătați cartea doar prin gesturi."], ["neg", "Doar ce NU este", "Descrieți cartea doar prin ce nu este: „Nu se mănâncă. Nu încape în buzunar.”"], ["blitz", "Blitz", "Timpul de discuție se înjumătățește."], ["dbl", "Dublu sau nimic", "Punctele din runda asta se dublează."], ["voc", "Voce de personaj", "Toată lumea vorbește cu aceeași voce de personaj, până la sfârșitul discuției."], ["ag", "Agent dublu"], ["ex", "Intrus în plus"]] as any[][]);
 
 export function maybeApplyTwist(g: Round, n: number) {
     if (!state.tw || g.troll) {
@@ -20,6 +20,9 @@ export function maybeApplyTwist(g: Round, n: number) {
     }
     g.tw = t;
     state.ltw = t;
+    if (t == "voc") {
+        g.persona = pickPersona();
+    }
     if (t == "ex") {
         g.intr.push(civ[Math.random() * civ.length | 0]);
     }

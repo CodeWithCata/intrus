@@ -8,6 +8,7 @@ import { state } from "#lib/stores/settings.svelte.ts";
 import { playerName } from "#lib/stores/players.svelte.ts";
 import { VOICE_SUPPORTED, speak } from "#lib/voice/host.ts";
 import { TWISTS } from "#lib/game/twists.ts";
+import { PERSONAS } from "#lib/game/twist-rules.ts";
 import { round } from "#lib/stores/ui.svelte.ts";
 import { beep } from "#lib/audio/tone.ts";
 import { vibrate } from "#lib/audio/haptics.ts";
@@ -54,6 +55,9 @@ export function speakTalkIntro(f?: any) {
     let s = t("spStarts", { name: playerName(round.first) });
     if (tw && tw[2]) {
         s += " " + t("spTwist", { name: tr(tw[1]), desc: tr(tw[2]) });
+    }
+    if (round.tw == "voc" && round.persona != null) {
+        s += " " + t("spPersona", { v: tr(PERSONAS[round.persona]) });
     }
     if (state.qm && questionState.q) {
         s += " " + t("spQuestion", { q: questionState.q });

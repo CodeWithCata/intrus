@@ -5,7 +5,7 @@ import type { PublicState } from "#lib/online/protocol.ts";
 import { FakeTimers, FakeWS, MemKV } from "./online.helpers.ts";
 
 const stateOf = (over: Partial<PublicState> = {}): PublicState => ({
-  code: "ABCDEF", hostId: "me", phase: "lobby", round: 0, settings: null, timer: null, vote: null, seen: null, dealt: null, talk: null, twist: null, question: null, reveal: null,
+  code: "ABCDEF", hostId: "me", phase: "lobby", round: 0, settings: null, timer: null, vote: null, seen: null, dealt: null, talk: null, twist: null, persona: null, question: null, reveal: null,
   players: [{ id: "me", name: "Ana", l: 0, score: 0, connected: true }], ...over
 });
 

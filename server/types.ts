@@ -83,6 +83,8 @@ export interface Current {
   /** Double agent twist: the civilian who got `word2`. */
   agentId: string | null;
   word2: string | null;
+  /** "Voce de personaj" twist: index into PERSONAS (game/twist-rules.ts) of the voice the table talks in, else null. */
+  persona: number | null;
   /** Intruders know each other (each intruder's role lists the others). */
   known: boolean;
   /** The hint the host wrote for this custom word, or null. */
@@ -193,6 +195,8 @@ export interface PublicState {
   talk: TalkView | null;
   /** The twist shown to everybody on the discussion screen (the secret ones come only with the reveal). */
   twist: string | null;
+  /** The persona of the "Voce de personaj" twist (an index into PERSONAS), shown together with the twist; null for every other round. */
+  persona: number | null;
   question: QuestionView | null;
   reveal: RevealView | null;
 }
