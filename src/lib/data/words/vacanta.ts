@@ -9,7 +9,6 @@ export const vacanta: string[] = [
   "pârtie",
   "cabană",
   "pensiune",
-  "all inclusive",
   "apartament închiriat",
   "check-in",
   "bagaj de mână",
