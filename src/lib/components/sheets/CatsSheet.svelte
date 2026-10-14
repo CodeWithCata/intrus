@@ -8,7 +8,7 @@
   import { toggleOption } from "#lib/components/settings/settings.ts";
   import CustomWordForm from "#lib/components/categories/CustomWordForm.svelte";
   import WordLists from "#lib/components/categories/WordLists.svelte";
-  import { state } from "#lib/stores/settings.svelte.ts";
+  import { state as appState } from "#lib/stores/settings.svelte.ts";
   import { closeSheet } from "#lib/components/ui/sheets.ts";
   import { CATEGORIES } from "#lib/data/words/index.ts";
   import { catName } from "#lib/data/category-names.ts";
@@ -37,20 +37,20 @@
   });
   /* The tiles on offer: all of them in Romanian, only the ones that have a list in another language. */
   const cats = $derived(catsFn());
-  const tiles: HTMLElement[] = [];
+  const tiles: HTMLElement[] = $state([]);
   let cuTile: HTMLElement;
   let cuInput: HTMLInputElement;
 
   function pickCategory(c: string, i: number) {
     toggleCategory(c);
     pops[i].fire();
-    if (state.cats.includes(c)) {
+    if (appState.cats.includes(c)) {
       sparkBurst(tiles[i]);
     }
   }
 
   function pickAll() {
-    const all = cats.every((c) => state.cats.includes(c));
+    const all = cats.every((c) => appState.cats.includes(c));
     toggleAllCategories();
     pops.forEach((p, i) =>
       setTimeout(() => {
@@ -65,7 +65,7 @@
   function pickCustom() {
     toggleCustomWords();
     cuPop.fire();
-    if (state.cu) {
+    if (appState.cu) {
       sparkBurst(cuTile);
       flushSync();
       cuInput?.focus();
@@ -75,12 +75,12 @@
 
 <Sheet {open} title={t("suCats")} onclose={closeSheet} name="cats">
   {#snippet head()}<p class="muted small" class:warn={!activeCategoryCount()} class:nudge={noteNudge.on} id="cn">{catNote()}</p>{/snippet}
-  {#snippet aside()}<button class="pillbtn" id="ca" onclick={pickAll}>{cats.every((c) => state.cats.includes(c)) ? t("csNone") : t("catAll")}</button>{/snippet}
+  {#snippet aside()}<button class="pillbtn" id="ca" onclick={pickAll}>{cats.every((c) => appState.cats.includes(c)) ? t("csNone") : t("catAll")}</button>{/snippet}
 <div class="cats">
-  {#each cats as c, i (i)}<button class="cat" class:pop={pops[i].on} bind:this={tiles[i]} style="--c:{i}" onclick={() => pickCategory(c, i)} aria-pressed={state.cats.includes(c)}><span class="cic"><Icon name={CI[c]} /></span><span class="cn">{catName(c, locale.words)}</span><small>{countText(c)}</small><Tick /></button>{/each}<button class="cat wide" class:pop={cuPop.on} bind:this={cuTile} style="--c:6" onclick={pickCustom} aria-pressed={state.cu}><span class="cic"><Icon name="pencil" /></span><span class="tx"><span class="cn">{t("csCustom")}</span><small id="cuc">{cuTxt()}</small></span><Tick /></button>
+  {#each cats as c, i (i)}<button class="cat" class:pop={pops[i].on} bind:this={tiles[i]} style="--c:{i}" onclick={() => pickCategory(c, i)} aria-pressed={appState.cats.includes(c)}><span class="cic"><Icon name={CI[c]} /></span><span class="cn">{catName(c, locale.words)}</span><small>{countText(c)}</small><Tick /></button>{/each}<button class="cat wide" class:pop={cuPop.on} bind:this={cuTile} style="--c:6" onclick={pickCustom} aria-pressed={appState.cu}><span class="cic"><Icon name="pencil" /></span><span class="tx"><span class="cn">{t("csCustom")}</span><small id="cuc">{cuTxt()}</small></span><Tick /></button>
 </div>
-<Panel><SwitchRow icon="balloon" title={t("csParty")} desc={t("csPartyDesc")} checked={state.pty} onchange={() => toggleOption("pty")} /></Panel>
-{#if state.pty}<div class="cats"><button class="cat wide" onclick={() => toggleCategory("Petrecere")} aria-pressed={state.cats.includes("Petrecere")}><span class="cic"><Icon name={CI["Petrecere"]} /></span><span class="tx"><span class="cn">{catName("Petrecere", locale.words)}</span><small>{countText("Petrecere")}</small></span><Tick /></button></div>{/if}
-<div id="cw" hidden={!state.cu}><input class="custom" type="text" placeholder={t("csCustomPlaceholder")} bind:this={cuInput} bind:value={state.custom} aria-label={t("csCustom")} /><CustomWordForm /><WordLists /></div>
+<Panel><SwitchRow icon="balloon" title={t("csParty")} desc={t("csPartyDesc")} checked={appState.pty} onchange={() => toggleOption("pty")} /></Panel>
+{#if appState.pty}<div class="cats"><button class="cat wide" onclick={() => toggleCategory("Petrecere")} aria-pressed={appState.cats.includes("Petrecere")}><span class="cic"><Icon name={CI["Petrecere"]} /></span><span class="tx"><span class="cn">{catName("Petrecere", locale.words)}</span><small>{countText("Petrecere")}</small></span><Tick /></button></div>{/if}
+<div id="cw" hidden={!appState.cu}><input class="custom" type="text" placeholder={t("csCustomPlaceholder")} bind:this={cuInput} bind:value={appState.custom} aria-label={t("csCustom")} /><CustomWordForm /><WordLists /></div>
 <button class="btn go" onclick={closeSheet}>{t("csDone")}</button>
 </Sheet>

@@ -8,7 +8,7 @@
   publish = "build"
 
 [build.environment]
-  NODE_VERSION = "22"
+  NODE_VERSION = "24"
 
 # A missing build file must be a real 404, never the app shell: otherwise the HTML could be cached under an old
 # /_app/immutable/... chunk URL (immutable cache) and break every returning visitor. Must stay ABOVE the catch-all.

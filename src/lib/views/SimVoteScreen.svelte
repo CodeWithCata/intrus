@@ -22,7 +22,7 @@
   let phase = $state<"ready" | "count" | "done">("ready");
   let left = $state(3);
   let live = $state<number[]>(Array(n).fill(0));
-  const tiles: HTMLElement[] = [];
+  const tiles: HTMLElement[] = $state([]);
   // Plain Map on purpose: pointer positions are bookkeeping read by handlers only, never rendered.
   // eslint-disable-next-line svelte/prefer-svelte-reactivity
   const points = new Map<number, Point>();

@@ -8,7 +8,7 @@
   },
   "engines": {
     "node": ">=24",
-    "pnpm": ">=10"
+    "pnpm": ">=12"
   },
   "scripts": {
     "dev": "vite dev",
@@ -38,22 +38,22 @@
     "lighthouse": "npx --yes lighthouse http://localhost:4173 --form-factor=mobile --view"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.23.0",
+    "@cloudflare/vitest-plugin": "^1.4.1",
     "@cloudflare/workers-types": "^5.20261013.1",
     "@eslint/js": "^10.0.0",
     "@playwright/test": "^1.64.1",
     "@sveltejs/adapter-static": "^4.0.0",
     "@sveltejs/kit": "^3.0.1",
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
-    "@types/node": "^22.20.5",
+    "@types/node": "^24.19.2",
     "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.0",
     "eslint-plugin-svelte": "^3.15.0",
-    "globals": "^16.5.0",
+    "globals": "^17.13.0",
     "jsdom": "^30.1.2",
     "partyserver": "^0.5.10",
     "prettier": "^3.9.10",
-    "prettier-plugin-svelte": "^3.4.0",
+    "prettier-plugin-svelte": "^4.1.1",
     "svelte": "^5.57.2",
     "svelte-check": "^4.7.6",
     "typescript": "~6.0.3",
@@ -64,5 +64,6 @@
   },
   "dependencies": {
     "valibot": "^1.5.0"
-  }
+  },
+  "packageManager": "pnpm@12.11.2"
 }
