@@ -13,11 +13,7 @@ const asWarnings = configs =>
     configs.map(c => (c.rules ? { ...c, rules: Object.fromEntries(Object.entries(c.rules).map(([k, v]) => [k, Array.isArray(v) ? ["warn", ...v.slice(1)] : v === "off" || v === 0 ? v : "warn"])) } : c));
 
 export default defineConfig(
-<<<<<<< HEAD
-    { ignores: [".svelte-kit/", "build/", "node_modules/", "static/", "test-results/", "playwright-report/"] },
-=======
     { ignores: ["_legacy/", ".svelte-kit/", "build/", "node_modules/", "static/", "test-results/", "playwright-report/", "server/.wrangler/"] },
->>>>>>> ac0747e (lint: ignore generated server/.wrangler output)
     js.configs.recommended,
     ...asWarnings(ts.configs.recommended),
     ...asWarnings(svelte.configs["flat/recommended"]),
