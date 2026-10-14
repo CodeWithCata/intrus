@@ -17,6 +17,9 @@ export default defineConfig({
         })
     ],
     test: {
-        include: ["server/tests/workers/**/*.test.ts"]
+        include: ["server/tests/workers/**/*.test.ts"],
+        // Vitest 5 caches transformed modules on disk by default. The Workers pool reads those cache files from inside workerd,
+        // which fails (Windows: 'File path must be a file: URL'; CI: 'no such file or directory ... .vitest-cache'). Turn it off here only.
+        experimental: { fsModuleCache: false }
     }
 });
