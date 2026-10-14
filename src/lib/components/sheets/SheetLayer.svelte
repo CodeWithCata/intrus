@@ -23,6 +23,7 @@
   import LshareSheet from "#lib/components/sheets/LshareSheet.svelte";
   import LimportSheet from "#lib/components/sheets/LimportSheet.svelte";
   import AskSheet from "#lib/components/sheets/AskSheet.svelte";
+  import TwistsSheet from "#lib/components/sheets/TwistsSheet.svelte";
 
   const sheets: Record<SheetName, Component<any, any, any>> = {
     help: HelpSheet,
@@ -38,7 +39,8 @@
     lname: LnameSheet,
     lshare: LshareSheet,
     limport: LimportSheet,
-    ask: AskSheet
+    ask: AskSheet,
+    twists: TwistsSheet
   };
 
   // The last sheet that was open: it stays mounted (open = false) while its exit transition plays.

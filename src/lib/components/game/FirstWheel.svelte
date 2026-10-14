@@ -23,8 +23,16 @@
   let { first, ondone, players = appState.players, startAt }: { first: number; ondone: () => void; players?: { a: number; l?: number; ph?: string }[]; startAt?: number } = $props();
 
   const n = untrack(() => players.length);
-  const size = n > 8 ? 28 : 36;
+  const size = n > 8 ? 28 : n > 6 ? 34 : 40;
+  /**
+   * Slice colours: two tints alternate; with an odd count the last slice takes a third tint so it never touches a slice of its
+   * own colour. Built once from numbers only (no player text). Slice i is centred at i * 360 / n, so the gradient starts half a slice early.
+   */
+  const discBg = `conic-gradient(from ${-180 / n}deg, ${Array.from({ length: n }, (_, i) => `var(--wc${i % 2 ? 2 : n % 2 && i === n - 1 && n > 1 ? 3 : 1}) ${(i * 360) / n}deg ${((i + 1) * 360) / n}deg`).join(", ")})`;
   let disk = $state<HTMLElement>();
+  let ptr = $state<HTMLElement>();
+  /** Each slice that passes the pointer flicks it aside and it springs back: one short transform animation on a tiny element. */
+  const flick = () => ptr?.animate?.([{ transform: "rotate(0deg)" }, { transform: "rotate(-18deg)", offset: 0.3 }, { transform: "rotate(0deg)" }], { duration: 140, easing: "ease-out" });
   /** True from the moment the disc is on its final angle until the wheel is unmounted; hides "Sari peste" and makes `settle` run once. */
   let settled = $state(false);
 
@@ -74,6 +82,7 @@
           ids.push(setTimeout(() => {
             wheelTick(i / Math.max(1, plan.ticks.length - 1));
             vibrate(8);
+            flick();
           }, at - elapsed));
         }
       });
@@ -99,9 +108,9 @@
 
 <div class="wheelbox"
   ><div class="wheelwrap" role="img" aria-label={t("rdWheelAria")}
-    ><i class="wptr" aria-hidden="true"></i
-    ><div class="wheel" bind:this={disk}
-      >{#each players as p, i (i)}<span class="wslice" style="--a:{(i * 360) / n}deg"><span class="wav"><Avatar player={p} {size} /></span></span>{/each}</div
-    ></div
+    ><i class="wptr" bind:this={ptr} aria-hidden="true"></i
+    ><div class="wheel" bind:this={disk} style:background={discBg} style:--n={n} style:--sz="{size}px"
+      >{#each players as p, i (i)}<span class="wslice" class:win={settled && i === first} style="--a:{(i * 360) / n}deg"><span class="wav"><Avatar player={p} {size} /></span></span>{/each}</div
+    ><i class="whub" aria-hidden="true"></i></div
   ><button class="link wskip" disabled={settled} style:visibility={settled ? "hidden" : null} onclick={() => skip()}>{t("rdSkip")}</button></div
 >

@@ -207,3 +207,8 @@ html.noswap *,html.noswap *::before,html.noswap *::after{transition:none!importa
 .scrim:not(.still) .sheet>:nth-child(n+2){animation:upm .3s var(--out) .04s backwards}
 }
 @media (hover:none) and (prefers-reduced-motion:reduce){.screen>*:not(.stamp),.page2>*,.hero2,#app>.dock{animation:none}}
+
+/* Online sheet, name row and code field: they had hardcoded white backgrounds, so in dark/noir the light --ink text vanished on them. */
+html:is([data-theme=dark],[data-theme=noir]) .sheet[data-k="online"] .stack>.cr.me{background:linear-gradient(180deg,var(--e1),var(--e2));border-color:var(--bd);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 10px 24px -18px var(--shd)}
+html:is([data-theme=dark],[data-theme=noir]) .sheet[data-k="online"] .stack>input.custom:focus{background:var(--e1)}
+html:is([data-theme=dark],[data-theme=noir]) .sheet[data-k="online"] .stack>input.custom{background:var(--e2)}

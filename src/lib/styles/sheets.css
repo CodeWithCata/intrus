@@ -7,6 +7,14 @@
 .cr:has(.switch[data-a="troll"][aria-checked="true"]) .ri{background:var(--red)}
 .cr.off .ri,.cr.off .rt{opacity:.5}
 .switch:disabled{opacity:.35;pointer-events:none}
+/* Quiet drill-down row (e.g. "See all twists"): no icon tile, text lined up under the row above, grey status and chevron. */
+.cr.nav{width:100%;min-height:48px;padding:0 var(--s2) 0 calc(var(--s2) * 2 + 44px);border:0;border-top:1px solid var(--line);background:none;text-align:left;color:var(--grey);font-size:var(--fs-s);font-weight:700;transition:background var(--ease)}
+.cr.nav .rt{flex:1;min-width:0}
+.cr.nav .navv{flex:none}
+.cr.nav .nvi{flex:none;width:16px;height:16px;display:grid;place-items:center;opacity:.55}
+.cr.nav:disabled{opacity:.45;pointer-events:none}
+.cr.nav:active{background:var(--fog)}
+@media (hover:hover) and (pointer:fine){.cr.nav:hover{background:var(--fog)}}
 .rc{display:flex;flex-direction:column;gap:var(--s2)}
 .rh{display:flex;align-items:center;gap:var(--s2)}
 .val{flex:none;min-width:44px;text-align:right;line-height:1}
@@ -275,3 +283,12 @@ stop[stop-color="#B80024" i]{stop-color:var(--a2)}
 .pl .cr.dragging{position:relative;z-index:4;background:#fff;box-shadow:0 22px 40px -16px rgba(17,17,20,.5),0 0 0 2px var(--ink)}
 /* Theme switch: on mouse devices (see canFadeTheme in settings.ts) the whole page cross-fades as ONE picture (View Transitions API), so gradients, shadows and text all change together. An earlier per-element colour fade flashed: gradients and shadows cannot fade, so backgrounds jumped to the new theme at once while the text slowly changed colour. Touch devices, lite mode and reduced motion switch instantly. */
 @media (hover:hover) and (pointer:fine){::view-transition-old(root),::view-transition-new(root){animation-duration:.28s;animation-timing-function:ease}}
+/* Rules sheet, "All twists": a reference list. Only the list scrolls (like .plscroll in the players sheet): the title stays on top, "Gata" stays pinned below, and a soft fade at the bottom hints there is more. (.panel clips with overflow:hidden, so without this the panel shrank to the window and cut the last rows off.) Rows are top-aligned so the icon lines up with the name when a rule wraps, and the dividers start at the text, not at the panel edge. Drag-to-close already ignores an inner scroller that is scrolled away from the top (sheet-drag.ts, scrolledAway). */
+.sheet[data-k="twists"]{overflow:hidden}
+.sheet .twl{--twp:clamp(14px,4vw,18px);--twi:clamp(38px,10.5vw,44px);--twg:clamp(12px,3.5vw,16px);flex:1 1 auto;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--sbt) transparent;-webkit-mask-image:linear-gradient(#000 calc(100% - 28px),transparent);mask-image:linear-gradient(#000 calc(100% - 28px),transparent)}
+.sheet .twl::after{content:"";display:block;height:20px}
+.sheet .twl .cr{position:relative;min-height:0;align-items:flex-start;padding:clamp(12px,3.4vw,16px) var(--twp);gap:var(--twg);border-top:0}
+.sheet .twl .cr+.cr::before{content:"";position:absolute;top:0;right:var(--twp);left:calc(var(--twp) + var(--twi) + var(--twg));height:1px;background:var(--line)}
+.sheet .twl .ri{flex:none;width:var(--twi);height:var(--twi);border-radius:13px}
+.sheet .twl .rname{font-size:clamp(15px,4.2vw,16.5px);line-height:1.25}
+.sheet .twl .rdesc{margin-top:3px;font-size:clamp(13px,3.6vw,14px);line-height:1.4}

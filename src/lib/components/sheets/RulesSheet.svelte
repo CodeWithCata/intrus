@@ -8,7 +8,7 @@
   import SwitchRow from "#lib/components/sheets/SwitchRow.svelte";
   import Stepper from "#lib/components/rules/Stepper.svelte";
   import { state } from "#lib/stores/settings.svelte.ts";
-  import { closeSheet } from "#lib/components/ui/sheets.ts";
+  import { closeSheet, openSheet } from "#lib/components/ui/sheets.ts";
   import { sum } from "#lib/components/categories/category-ui.ts";
   import { lineupOn } from "#lib/components/players/lineup.ts";
   import { HD, HL, HM, TIMES, maxIntruders, setHintMode, setTimer, setVoteMode, stepIntruders, toggleTroll } from "#lib/components/rules/rules-ui.ts";
@@ -70,6 +70,7 @@
   <Panel>
     <SwitchRow icon="troll" title={t("ruTroll")} desc={n < 4 ? t("ruTrollNeed") : t("ruTrollDesc")} checked={state.troll} off={n < 4} hook="troll" onchange={toggleTroll} />
     <SwitchRow icon="dice" title={t("ruTwists")} desc={t("ruTwistsDesc")} checked={state.tw} onchange={() => toggleOption("tw")} />
+    <button class="cr nav" disabled={!state.tw} onclick={() => openSheet("twists")}><span class="rt">{t("ruTwistsSee")}</span><span class="navv">{state.tw ? t("ruTwistsSeeOn") : t("ruTwistsSeeOff")}</span><span class="nvi"><Icon name="chev" /></span></button>
     <SwitchRow icon="mask" title={t("ruTwins")} desc={state.kn ? t("ruTwinsDescKn") : t("ruTwinsDesc")} checked={state.twn} off={state.kn} onchange={() => toggleOption("twn")} />
     <SwitchRow icon="users" title={t("ruKnow")} desc={partnersDesc} checked={state.kn} off={!canPartners || state.twn} onchange={() => toggleOption("kn")} />
     <SwitchRow icon="help" title={t("ruQuestions")} desc={t("ruQuestionsDesc")} checked={state.qm} onchange={() => toggleOption("qm")} />

@@ -81,6 +81,7 @@ body:not(.home) .bgart .ai{will-change:auto}
 
 /* v2 effects off in "Mod telefon slab", "Mod relaxat" and with reduced motion (the JS also checks isCalm() before building them). The opening wheel is the exception: it also runs in "Mod telefon slab" (see wheelAllowed() in utils/calm.ts). */
 html.lite .talkdim,html.relaxed .talkdim,html.relaxed .wheelbox,html.lite .dlay,html.relaxed .dlay{display:none!important}
+html.lite .wheelwrap::after{animation:none!important}
 html.lite .dlay .dots i,html.relaxed .dlay .dots i,html.lite .simcount,html.relaxed .simcount,html.lite .score,html.relaxed .score{animation:none!important;transition:none!important}
 @media (prefers-reduced-motion:reduce){.talkdim,.wheelbox,.dlay{display:none!important}.dlay .dots i,.simcount{animation:none!important}.score{transition:none!important}}
 

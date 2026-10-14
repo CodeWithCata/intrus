@@ -75,7 +75,7 @@ export interface Rematch {
 }
 
 /** Every value state.sheet can take (one component per name in components/sheets/). */
-export type SheetName = "help" | "set" | "players" | "avatar" | "cats" | "rules" | "online" | "groups" | "gstats" | "gname" | "lname" | "lshare" | "limport" | "ask";
+export type SheetName = "help" | "set" | "players" | "avatar" | "cats" | "rules" | "online" | "groups" | "gstats" | "gname" | "lname" | "lshare" | "limport" | "ask" | "twists";
 
 export interface State {
     players: Player[];
