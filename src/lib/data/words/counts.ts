@@ -37,6 +37,6 @@ export const WORD_COUNTS: Record<string, number> = {
     "Muzică românească": 92,
     "Paște și Halloween": 80,
     "Tradiții și datini": 84,
-    "Vacanță": 89,
+    "Vacanță": 88,
     "Petrecere": 87
 };
