@@ -16,7 +16,7 @@ describe("starting a round", () => {
     const two = RL.joinRoom(RL.createRoom("C", "host", "H"), "p1", "P1");
     expect(() => RL.startRound(two, "host", { imposters: 1 }, ctx())).toThrow(/Need at least/);
     const room = lobbyOf(3);
-    room.settings = { cats: ["nope"], imposters: 1, minutes: 3, hint: "category", lang: "en", customName: "", tw: false, qm: false, troll: false, twn: false, kn: false };
+    room.settings = { cats: ["nope"], imposters: 1, minutes: 3, hint: "category", lang: "en", customName: "", tw: false, qm: false, troll: false, twn: false, kn: false, wh: true };
     expect(() => RL.startRound(room, "host", { imposters: 1 }, ctx({ packs: [] }))).toThrow(/No words/);
   });
 
@@ -143,7 +143,7 @@ describe("a rejected call changes nothing (bug A1)", () => {
 
   test("startRound with no words changes nothing, not even the recently-used memory", () => {
     const room = lobbyOf(4);
-    room.settings = { cats: ["nope"], imposters: 1, minutes: 3, hint: "category", lang: "en", customName: "", tw: false, qm: false, troll: false, twn: false, kn: false };
+    room.settings = { cats: ["nope"], imposters: 1, minutes: 3, hint: "category", lang: "en", customName: "", tw: false, qm: false, troll: false, twn: false, kn: false, wh: true };
     const before = structuredClone(room);
     expect(() => RL.startRound(room, "host", {}, ctx({ packs: [] }))).toThrow(/No words/);
     expect(room).toEqual(before);

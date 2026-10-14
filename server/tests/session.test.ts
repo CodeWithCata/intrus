@@ -108,7 +108,7 @@ describe("game modes and local-only settings", () => {
     const { host } = await rig.table(3);
     await rig.send(host, { type: "settings", settings: { minutes: 2, tw: true, qm: true, gid: "g1", twists: ["x"] } });
     const settings = rig.session.room?.settings;
-    expect(Object.keys(settings ?? {}).sort()).toEqual(["cats", "customName", "hint", "imposters", "kn", "lang", "minutes", "qm", "troll", "tw", "twn"]);
+    expect(Object.keys(settings ?? {}).sort()).toEqual(["cats", "customName", "hint", "imposters", "kn", "lang", "minutes", "qm", "troll", "tw", "twn", "wh"]);
     expect(settings?.tw).toBe(true);
     expect(settings?.qm).toBe(true);
     expect(JSON.stringify(rig.session.room).includes("gid")).toBe(false);

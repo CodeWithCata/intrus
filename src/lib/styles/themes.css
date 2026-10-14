@@ -175,7 +175,9 @@ html:is([data-theme=dark],[data-theme=noir]) .wd:not(.me){background:#26262E;box
 .sheet>.shead,.sheet>#st{touch-action:none;-webkit-user-select:none;user-select:none}
 .sheet[data-drag]{cursor:grabbing;-webkit-user-select:none;user-select:none}
 @media (hover:hover) and (pointer:fine){.sheet>.grab{cursor:grab}}
-.scrim::before{opacity:var(--dim,1);transition:opacity .28s cubic-bezier(.22,1,.36,1)}
+/* --dim is registered as NOT inherited, so writing it on every drag move (sheet-drag.ts) restyles only the scrim and its ::before, not every element inside the sheet. The pseudo-element takes it from the scrim with `inherit`. */
+@property --dim{syntax:"<number>";inherits:false;initial-value:1}
+.scrim::before{--dim:inherit;opacity:var(--dim,1);transition:opacity .28s cubic-bezier(.22,1,.36,1)}
 .scrim[data-dragging]::before{transition:none}
 
 /* Dark / noir: --ink turns light there, so the badges that pair it with fixed white text need the same inverted look as .btn.go (they had white text on a near-white pill). */

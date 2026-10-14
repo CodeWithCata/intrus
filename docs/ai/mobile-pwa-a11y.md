@@ -36,3 +36,9 @@
 - `components/game/confetti.ts`: one batched insert and one cleanup timer.
 - `performance.css`: `html.lite .bgart .ai{will-change:auto}` (no permanent GPU layers while lite stops their animation).
 - Golden `setup.two-groups-no-current-lite.html` regenerated on purpose: the only change is 30 removed SMIL tags.
+
+## Phone scrolling / menu lag pass (Oct 2026, from code reading, not yet profiled on a device)
+- `performance.css` (last block): on touch / narrow screens with lite OFF, SVG-child animations in `.bgart` and the `.hero2` svg, the `.bgart::before/::after` drift and their `will-change` are off; only the `.ai` image drifts (compositor) keep running. Reason: SVG-child and gradient-layer animations repaint on the main thread every frame, also behind an open sheet (the `html.sheetopen` pause is desktop-only on purpose, it flashed on phones).
+- `sheet-drag.ts`: the body-drag `touchmove` is passive (a non-passive one made Chrome wait for the main thread on every move, janky sheet scrolling). It relies on `.sheet{overscroll-behavior-y:contain}` and never calls `preventDefault`.
+- `themes.css`: `--dim` is a registered non-inherited property (`@property`), and `.scrim::before` takes it with `inherit`, so a drag move restyles the scrim only, not the whole sheet subtree.
+- Still open if lag remains: `{#key nav.n}` rebuilds the whole screen on every `go()`; the `--k` stagger loop in `App.svelte` and entrance animations run when lite is off; SMIL icons on the screen behind run idle until a sheet opens (`SheetLayer.svelte`). Bisect with `?debug=1` (`debug/features.ts`) before changing them.

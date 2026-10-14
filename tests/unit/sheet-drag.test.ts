@@ -117,7 +117,8 @@ describe("drag by the body on touch", () => {
     touch(body, "touchstart", 100);
     at(100);
     const e = touch(body, "touchmove", 130);
-    expect(e.defaultPrevented).toBe(true);
+    expect(e.defaultPrevented).toBe(false); // passive listener: the sheet follows the finger without cancelling the touch
+    expect(sheet.hasAttribute("data-drag")).toBe(true);
     at(200);
     touch(body, "touchmove", 260);
     touch(body, "touchend", 260);

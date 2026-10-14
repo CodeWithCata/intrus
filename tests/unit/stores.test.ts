@@ -26,7 +26,7 @@ describe("round", () => {
 
 describe("autosave", () => {
   // The names players already have in their browsers. Adding or renaming one needs a migration.
-  const SAVED_KEYS = ["players", "k", "cats", "tm", "hint", "custom", "cu", "troll", "snd", "vb", "lite", "liteSet", "theme", "acc", "rv", "rs", "rsv", "rb", "cd", "tk", "rounds", "hist", "rn", "seen", "vol", "scores", "last", "groups", "gid", "rc", "sr", "tw", "qm", "vh", "wl0", "dr", "pv", "vm", "twn", "kn", "rx", "pty", "gt", "cv"];
+  const SAVED_KEYS = ["players", "k", "cats", "tm", "hint", "custom", "cu", "troll", "snd", "vb", "lite", "liteSet", "theme", "acc", "rv", "rs", "rsv", "rb", "cd", "tk", "rounds", "hist", "rn", "seen", "vol", "scores", "last", "groups", "gid", "rc", "sr", "tw", "qm", "vh", "wl0", "dr", "pv", "vm", "twn", "kn", "rx", "pty", "gt", "wh", "cv"];
 
   it("saves once, 300 ms after the last change, under the unchanged key names", async () => {
     persist.startAutosave();

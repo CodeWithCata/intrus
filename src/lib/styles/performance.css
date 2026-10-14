@@ -100,3 +100,11 @@ html.lite .dlay .dots i,html.relaxed .dlay .dots i,html.lite .simcount,html.rela
 }
 /* Home screen behind the sheet: the "Categorii" row grew by a few pixels when the first category icon appeared (0 -> 1 selected) and moved every row below it. Every summary line now has the height of the icon stack, whether it is there or not. */
 .sum .sv{min-height:32px}
+
+/* Phones with "Mod telefon slab" OFF: the background keeps only what Chrome runs on the compositor (the drifting .ai images). Animations on SVG children (.tw .bl .qm .sm .ss .scf .sweep .mb .dr) and the drifting gradient layers repaint on the main thread every frame, even behind an open sheet, and that is what made scrolling and opening menus laggy. The gradient layers also drop to the screen size (no -12% bleed needed once they stand still) and every permanent GPU layer that no longer animates loses will-change. */
+@media (hover:none),(pointer:coarse),(max-width:820px){
+.bgart svg :is(.sweep,.dr,.tw,.bl,.sm,.mb,.qm,.ss,.scf),.hero2>svg :is(.look,.tw){animation:none!important}
+.bgart::before,.bgart::after{animation:none!important;will-change:auto;inset:0}
+.scrim{will-change:auto}
+.qs i{will-change:auto}
+}

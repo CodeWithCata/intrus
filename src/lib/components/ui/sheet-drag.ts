@@ -7,8 +7,10 @@
  *  - the grabber, the title and the header (`HANDLE`): Pointer Events, so mouse, touch and pen all work
  *    (the CSS gives those elements `touch-action: none`, so the browser does not scroll instead);
  *  - anywhere else on a touch screen, but only downwards and only while the sheet is scrolled to the
- *    top (Touch Events, because a non-passive `touchmove` is the only way to claim a pan that would
- *    otherwise scroll). Buttons, inputs (the volume slider) and `[data-nodrag]` never start a drag.
+ *    top (Touch Events). The listeners are passive: a non-passive `touchmove` makes Chrome wait for the main thread on every
+ *    move before it may scroll, which made scrolling inside a sheet janky on phones. Nothing needs preventDefault because
+ *    `.sheet{overscroll-behavior-y:contain}` (themes.css) leaves nothing to scroll or pull-to-refresh at the top. Buttons,
+ *    inputs (the volume slider) and `[data-nodrag]` never start a drag.
  *
  * On release past the threshold `close()` is called with the sheet still where the finger left it; the
  * exit transition (`sheetOut` in sheet-motion.ts) reads `data-dy` / `data-vy` and finishes the slide
@@ -184,9 +186,6 @@ export function dragToClose(node: HTMLElement, onclose: () => void) {
             }
         }
         if (mode === "drag") {
-            if (e.cancelable) {
-                e.preventDefault();
-            }
             move(cy);
         }
     };
@@ -201,7 +200,7 @@ export function dragToClose(node: HTMLElement, onclose: () => void) {
     node.addEventListener("pointerup", pup);
     node.addEventListener("pointercancel", pup);
     node.addEventListener("touchstart", tstart, { passive: true });
-    node.addEventListener("touchmove", tmove, { passive: false });
+    node.addEventListener("touchmove", tmove, { passive: true });
     node.addEventListener("touchend", tend);
     node.addEventListener("touchcancel", tend);
 

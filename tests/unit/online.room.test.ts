@@ -87,7 +87,7 @@ describe("saved seat and name", () => {
   });
 });
 
-const NO_MODES = { tw: false, qm: false, troll: false, twn: false, kn: false };
+const NO_MODES = { tw: false, qm: false, troll: false, twn: false, kn: false, wh: true }; // wh = opening wheel, on unless the player switched it off
 
 describe("settings and errors", () => {
   it("maps the app's settings to the server's", () => {
