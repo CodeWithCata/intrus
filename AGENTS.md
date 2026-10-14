@@ -66,8 +66,9 @@ Party game "one of you lies": everyone gets the same word except the intruder. S
 - Tests that walk the pass screens must tap `#gt` before the card exists (`boot.smoke.test.ts`, `screens.behaviour.test.ts`) and call `flushSync()` after every click.
 
 ## Known issues (Oct 2026)
-- `pnpm check` (strict TypeScript, `tsc` for `server/`), `pnpm test` (623 tests) and `pnpm lint` (errors) are all clean. Keep them clean; a failure is yours.
-- `pnpm lint` still prints about 180 warnings (mostly unused variables in legacy-ported code).
+- `pnpm check` (strict TypeScript, `tsc` for `server/`), `pnpm test` (655 tests) and `pnpm lint` (0 errors) are all clean. Keep them clean; a failure is yours.
+- `pnpm lint` still prints 114 warnings (mostly `no-explicit-any` and unused variables). They are warnings, not errors.
+- Temporary: `minimumReleaseAgeExclude` in `pnpm-workspace.yaml` lists seven packages published on 2026-10-14 (Playwright 1.64.1, wrangler 4.151.0, and others). Delete that block once they are more than a day old, then run `pnpm install` to confirm.
 - `pnpm test:workers` cannot run yet: `@cloudflare/vitest-pool-workers` needs vitest ^4.1 and the repo is on vitest 5 (see `server/vitest.workers.config.ts`).
 - Planned, not built: round recap card + share button; "best liar / most caught" line (needs a saved group, see Group stats in `docs/ai/features-recipes.md`).
 - Open server findings (CSP, unverified Cloudflare assumptions): `docs/ai/online.md` ("Still open").
